@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="CLICK&City - Descubre ciudades del mundo. Encuentra información sobre clima, restaurantes, cultura, compras, parques y eventos en tu próximo destino.">
+  <meta name="keywords" content="ciudades, viajes, turismo, guía de ciudades, descubrir ciudades">
+  <title>CLICK&City - Descubre tu próxima ciudad</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1 class="logo">CLICK&City</h1>
+      <p class="tagline">Descubre qué hacer hoy en tu ciudad</p>
+    </header>
+
+    <main>
+      <!-- Home Page -->
+      <div id="homePage" class="home-page">
+        <div class="search-container">
+          <div class="search-box">
+            <form id="searchForm" class="search-form">
+              <input type="text" id="cityInput" class="search-input" placeholder="Escribe el nombre de una ciudad..."
+                required autocomplete="off">
+              <button type="submit" class="search-btn">Buscar</button>
+            </form>
+          </div>
+
+          <!-- Loading Spinner -->
+          <div id="loadingSpinner" class="loading-spinner hidden">
+            <div class="spinner"></div>
+            <p class="loading-text">Buscando información de la ciudad...</p>
+          </div>
+
+          <!-- Error Message -->
+          <div id="errorMessage" class="error-message hidden">
+            <span class="error-icon">⚠️</span>
+            <p id="errorText" class="error-text"></p>
+            <button id="dismissError" class="dismiss-btn">Cerrar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- City View -->
+      <div id="cityView" class="city-view hidden">
+        <button id="backBtn" class="back-btn">← Volver</button>
+
+        <div class="city-header">
+          <img id="cityImage" class="city-image" src="" alt="">
+          <div class="city-overlay">
+            <h2 id="cityName" class="city-name"></h2>
+            <p id="cityCountry" class="city-country"></p>
+          </div>
+        </div>
+
+        <div class="info-blocks" id="infoBlocks">
+          <!-- Info blocks will be dynamically generated -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
