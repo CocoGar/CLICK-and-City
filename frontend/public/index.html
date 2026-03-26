@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLICK&City - Descubre tu próxima ciudad</title>
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <div class="logo-wrap">
+        <span class="logo-click">CLICK</span><span class="logo-amp">&</span><span class="logo-city">City</span>
+      </div>
+      <p class="tagline">Descubre qué hacer hoy en tu ciudad</p>
+
+      <form class="search-form" id="searchForm">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input
+            type="text"
+            id="cityInput"
+            class="search-input"
+            placeholder="¿A dónde vas? Ej: Paris, Rome, Tokyo..."
+            autocomplete="off"
+            required
+          >
+        </div>
+        <button type="submit" class="search-btn">
+          Buscar
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </form>
+
+      <div class="hints">
+        <span>Prueba con:</span>
+        <a href="city.html?city=Madrid">Madrid</a>
+        <a href="city.html?city=Barcelona">Barcelona</a>
+        <a href="city.html?city=Paris">Paris</a>
+        <a href="city.html?city=Rome">Rome</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('searchForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const city = document.getElementById('cityInput').value.trim();
+      if (city) window.location.href = 'city.html?city=' + encodeURIComponent(city);
+    });
+  </script>
+</body>
+</html>
