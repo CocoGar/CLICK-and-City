@@ -81,11 +81,13 @@ function renderCards(weather, forecast, places) {
   weatherCard.className = "card card-wide";
 
   weatherCard.innerHTML = `
-    <div class="card-header">
-      <div class="card-icon">🌤️</div>
-      <h2 class="card-title">Clima</h2>
-    </div>
-    <div class="card-body">
+  <div class="card-header">
+    <div class="card-icon">🌤️</div>
+    <h2 class="card-title">Clima</h2>
+  </div>
+  <div class="card-body weather-split">
+
+    <div class="weather-split-today">
       ${
         weather
           ? `
@@ -96,31 +98,24 @@ function renderCards(weather, forecast, places) {
             <span>💨 ${weather.wind}</span>
             <span>🌡️ ${Math.round(weather.feelsLike)}°C</span>
           </div>
-        `
+          `
           : `<p class="card-text">No hay datos disponibles</p>`
       }
+    </div>
 
+    <div class="weather-split-forecast">
       ${
         forecast && forecast.length
           ? `
-          <div class="clima-forecast">
-            <div class="forecast-title">Próximos 5 días</div>
-            ${forecast
-              .map((day) => {
-                const DIAS_ES = [
-                  "Dom",
-                  "Lun",
-                  "Mar",
-                  "Mié",
-                  "Jue",
-                  "Vie",
-                  "Sáb",
-                ];
-                const hoy = new Date().toISOString().split("T")[0];
-                const fecha = new Date(day.date + "T12:00:00");
-                const nombreDia =
-                  day.date === hoy ? "Hoy" : DIAS_ES[fecha.getDay()];
-                return `
+          <div class="forecast-title">Próximos 5 días</div>
+          ${forecast
+            .map((day) => {
+              const DIAS_ES = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+              const hoy = new Date().toISOString().split("T")[0];
+              const fecha = new Date(day.date + "T12:00:00");
+              const nombreDia =
+                day.date === hoy ? "Hoy" : DIAS_ES[fecha.getDay()];
+              return `
                 <div class="forecast-row">
                   <span class="forecast-day">${nombreDia}</span>
                   <img class="forecast-icon" src="https://openweathermap.org/img/wn/${day.icon}.png" alt="${day.description}">
@@ -128,14 +123,15 @@ function renderCards(weather, forecast, places) {
                   <span class="forecast-temp-min">${Math.round(day.tempMin)}°</span>
                 </div>
               `;
-              })
-              .join("")}
-          </div>
-        `
-          : ""
+            })
+            .join("")}
+          `
+          : `<p class="card-text">No hay datos disponibles</p>`
       }
     </div>
-  `;
+
+  </div>
+`;
 
   grid.appendChild(weatherCard);
 
