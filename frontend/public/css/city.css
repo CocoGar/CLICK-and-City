@@ -3,7 +3,8 @@
 }
 
 :root {
-  --bg-page: #f4f5f7;
+  --bg-page: linear-gradient(180deg,rgba(255, 255, 255, 1) 0%, rgba(218, 226, 237, 1) 100%);
+
   --bg-card: rgba(255, 255, 255, 0.92);
   --bg-glass: rgba(255, 255, 255, 0.16);
   --text-main: #111827;
@@ -54,7 +55,7 @@ img {
 
 .hero {
   position: relative;
-  min-height: 520px;
+  min-height: 800px;
   overflow: hidden;
   background:
     linear-gradient(rgba(21, 30, 44, 0.46), rgba(21, 30, 44, 0.62)),
@@ -98,11 +99,14 @@ img {
 }
 
 .hero-content {
-  position: relative;
+  position: absolute;
+  bottom: 125px;       
+  left: 0;           
+  right: 0;           
   z-index: 3;
   max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 120px 24px 92px;
+  margin: 0 auto;     
+  padding: 120px 24px 0;
   text-align: left;
   color: var(--text-light);
 }
@@ -126,7 +130,8 @@ img {
 
 .city-name {
   margin: 0;
-  font-size: 5rem;
+  font-size: 6rem;
+  letter-spacing: 5px;
   line-height: 1.02;
   font-weight: 800;
   letter-spacing: 5px;
@@ -265,7 +270,7 @@ img {
 }
 
 .card-title {
-  margin: 0;
+  margin: 5px;
   font-size: 1.5rem;
   font-weight: 800;
   color: var(--text-main);
@@ -333,7 +338,7 @@ img {
 }
 
 .card-weather {
-  background: linear-gradient(135deg, #1e3a5f 0%, #2d5986 100%);
+  background: linear-gradient(135deg, #1e3a5f 0%, #5180B0 100%);
 }
 
 .card-weather .card-title,
@@ -382,7 +387,7 @@ img {
 }
 
 .weather-split-today {
-  padding: 10px 35px 35px 35px;
+  padding: 15px 4px 45px 45px;
   border-right: 1px solid #edf1f5;
   display: flex;
   flex-direction: column;
@@ -390,7 +395,7 @@ img {
 }
 
 .weather-split-forecast {
-  padding: 10px 35px 35px 35px;
+  padding: 15px 4px 45px 45px;
 }
 
 
@@ -412,7 +417,13 @@ img {
   align-items: center;
   gap: 8px;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(to right, rgba(255,255,255,0.12) 90%, transparent 90%) 1;
+}
+
+.forecast-row:last-child {
+  border-bottom: none;
+  border-image: none;
 }
 
 .forecast-row:last-child {
