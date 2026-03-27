@@ -23,6 +23,29 @@ function showError(message) {
 
 /* ================= HERO ================= */
 
+const TRADUCCIONES = {
+  "cielo claro": "Despejado",
+  "algo de nubes": "Algo nublado",
+  "nubes dispersas": "Parcialmente nublado",
+  "muy nuboso": "Muy nublado",
+  "cielo cubierto": "Nublado",
+  "lluvia ligera": "Lluvia ligera",
+  "lluvia moderada": "Lluvia moderada",
+  "lluvia fuerte": "Lluvia fuerte",
+  llovizna: "Llovizna",
+  tormenta: "Tormenta",
+  "nieve ligera": "Nieve ligera",
+  nieve: "Nieve",
+  niebla: "Niebla",
+  neblina: "Neblina",
+  bruma: "Bruma",
+};
+
+function traducirDesc(desc) {
+  const lower = desc.toLowerCase();
+  return TRADUCCIONES[lower] || lower.charAt(0).toUpperCase() + lower.slice(1);
+}
+
 function renderHero(city, weather) {
   const hero = $("heroContent");
   if (!hero) return;
@@ -37,7 +60,7 @@ function renderHero(city, weather) {
           <div class="weather-pill">
             <img src="https://openweathermap.org/img/wn/${weather.icon}.png" width="24" alt="${weather.description}" />
             <span class="temp">${Math.round(weather.temperature)}°C</span>
-            <span>${weather.description}</span>
+            <span>${traducirDesc(weather.description)}</span>
           </div>
         </div>
       `
@@ -45,7 +68,6 @@ function renderHero(city, weather) {
     }
   `;
 }
-
 /* ================= CARDS ================= */
 
 function renderCards(weather, forecast, places) {
@@ -68,7 +90,7 @@ function renderCards(weather, forecast, places) {
         weather
           ? `
           <div class="card-temp">${Math.round(weather.temperature)}°C</div>
-          <p class="card-text">${weather.description}</p>
+          <p class="card-text">${traducirDesc(weather.description).charAt(0).toUpperCase() + traducirDesc(weather.description).slice(1)}</p>
           <div class="card-weather-details">
             <span>💧 ${weather.humidity}%</span>
             <span>💨 ${weather.wind}</span>
@@ -82,17 +104,31 @@ function renderCards(weather, forecast, places) {
         forecast && forecast.length
           ? `
           <div class="clima-forecast">
-            <div class="forecast-title">Forecast</div>
+            <div class="forecast-title">Próximos 5 días</div>
             ${forecast
-              .map(
-                (day) => `
-              <div class="forecast-row">
-                <span class="forecast-day">${day.date}</span>
-                <span class="forecast-temp-max">${Math.round(day.tempMax)}°</span>
-                <span class="forecast-temp-min">${Math.round(day.tempMin)}°</span>
-              </div>
-            `
-              )
+              .map((day) => {
+                const DIAS_ES = [
+                  "Dom",
+                  "Lun",
+                  "Mar",
+                  "Mié",
+                  "Jue",
+                  "Vie",
+                  "Sáb",
+                ];
+                const hoy = new Date().toISOString().split("T")[0];
+                const fecha = new Date(day.date + "T12:00:00");
+                const nombreDia =
+                  day.date === hoy ? "Hoy" : DIAS_ES[fecha.getDay()];
+                return `
+                <div class="forecast-row">
+                  <span class="forecast-day">${nombreDia}</span>
+                  <img class="forecast-icon" src="https://openweathermap.org/img/wn/${day.icon}.png" alt="${day.description}">
+                  <span class="forecast-temp-max">${Math.round(day.tempMax)}°</span>
+                  <span class="forecast-temp-min">${Math.round(day.tempMin)}°</span>
+                </div>
+              `;
+              })
               .join("")}
           </div>
         `
@@ -107,7 +143,7 @@ function renderCards(weather, forecast, places) {
     { key: "restaurant", title: "Gastronomía 🍽️" },
     { key: "museum", title: "Ocio 🎭" },
     { key: "park", title: "Parques 🌿" },
-    { key: "shop", title: "Compras 🛍️" }
+    { key: "shop", title: "Compras 🛍️" },
   ];
 
   categories.forEach((category) => {
@@ -137,7 +173,7 @@ function renderCards(weather, forecast, places) {
                     ${place.address ? `<span class="lugar-direccion">${place.address}</span>` : ""}
                   </div>
                 </li>
-              `
+              `,
                 )
                 .join("")}
             </ul>
@@ -173,13 +209,13 @@ async function loadCity() {
       restaurant: [],
       museum: [],
       park: [],
-      shop: []
+      shop: [],
     };
 
     // WEATHER ✅
     try {
       weather = await fetchJson(
-        `${BACKEND}/api/weather?city=${encodeURIComponent(cityName)}`
+        `${BACKEND}/api/weather?city=${encodeURIComponent(cityName)}`,
       );
     } catch (error) {
       console.warn("Weather not available:", error.message);
@@ -188,7 +224,7 @@ async function loadCity() {
     // FORECAST ❌ opcional por ahora
     try {
       forecast = await fetchJson(
-        `${BACKEND}/api/weather/forecast/${encodeURIComponent(cityName)}`
+        `${BACKEND}/api/weather/forecast?city=${encodeURIComponent(cityName)}`,
       );
     } catch (error) {
       console.warn("Forecast not available:", error.message);
@@ -198,7 +234,7 @@ async function loadCity() {
     // PHOTO ❌ opcional por ahora
     try {
       const photoData = await fetchJson(
-        `${BACKEND}/api/photo/${encodeURIComponent(cityName)}`
+        `${BACKEND}/api/photo/${encodeURIComponent(cityName)}`,
       );
 
       if (photoData?.urls?.regular) {
@@ -211,10 +247,14 @@ async function loadCity() {
     // PLACES ✅
     try {
       const [restaurantRes, museumRes, parkRes, shopRes] = await Promise.all([
-        fetchJson(`${BACKEND}/api/places/${encodeURIComponent(cityName)}/restaurant`),
-        fetchJson(`${BACKEND}/api/places/${encodeURIComponent(cityName)}/museum`),
+        fetchJson(
+          `${BACKEND}/api/places/${encodeURIComponent(cityName)}/restaurant`,
+        ),
+        fetchJson(
+          `${BACKEND}/api/places/${encodeURIComponent(cityName)}/museum`,
+        ),
         fetchJson(`${BACKEND}/api/places/${encodeURIComponent(cityName)}/park`),
-        fetchJson(`${BACKEND}/api/places/${encodeURIComponent(cityName)}/shop`)
+        fetchJson(`${BACKEND}/api/places/${encodeURIComponent(cityName)}/shop`),
       ]);
 
       places.restaurant = restaurantRes.places || [];
