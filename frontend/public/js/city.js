@@ -52,7 +52,7 @@ function renderHero(city, weather) {
 
   hero.innerHTML = `
     <div class="city-tag">${weather?.country || ""}</div>
-    <h1 class="city-name">${city}</h1>
+    <h1 class="city-name">${city.replace(/\b\w/g, (l) => l.toUpperCase())}</h1>
     ${
       weather
         ? `
@@ -78,7 +78,7 @@ function renderCards(weather, forecast, places) {
 
   // WEATHER CARD
   const weatherCard = document.createElement("div");
-  weatherCard.className = "card card-wide";
+  weatherCard.className = "card card-wide card-weather";
 
   weatherCard.innerHTML = `
   <div class="card-header">

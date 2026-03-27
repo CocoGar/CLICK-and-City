@@ -103,7 +103,7 @@ img {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 120px 24px 92px;
-  text-align: center;
+  text-align: left;
   color: var(--text-light);
 }
 
@@ -126,10 +126,10 @@ img {
 
 .city-name {
   margin: 0;
-  font-size: 4.5rem;
+  font-size: 5rem;
   line-height: 1.02;
   font-weight: 800;
-  letter-spacing: -1.5px;
+  letter-spacing: 5px;
   color: #ffffff;
   text-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
 }
@@ -137,7 +137,7 @@ img {
 .city-meta {
   margin-top: 26px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .weather-pill {
@@ -332,6 +332,40 @@ img {
   font-weight: 600;
 }
 
+.card-weather {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2d5986 100%);
+}
+
+.card-weather .card-title,
+.card-weather .card-temp,
+.card-weather .forecast-day,
+.card-weather .forecast-temp-max {
+  color: #ffffff;
+}
+
+.card-weather .card-temp-desc,
+.card-weather .forecast-temp-min {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.card-weather .card-weather-details span {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.card-weather .forecast-row {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.card-weather .weather-split-today {
+  border-right-color: rgba(255, 255, 255, 0.15);
+}
+
+.card-weather .card-icon {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
 
 /* ===== WEATHER SPLIT ===== */
 
@@ -365,17 +399,20 @@ img {
 
 .forecast-title {
   margin-bottom: 12px;
-  font-weight: 800;
-  color: var(--text-main);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .forecast-row {
   display: grid;
   grid-template-columns: 70px 56px 1fr 1fr;
   align-items: center;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid #f0f3f7;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .forecast-row:last-child {
@@ -383,9 +420,8 @@ img {
 }
 
 .forecast-day {
-  font-weight: 900;
-  font-size: 1.25rem;
-  color: #374151;
+  font-weight: 400;
+  color: #ffffff;
 }
 
 .forecast-icon {
@@ -395,14 +431,13 @@ img {
 }
 
 .forecast-temp-max {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-main);
+  font-weight: 400;
+  color: #ffffff;
 }
 
 .forecast-temp-min {
-  font-size: 1.25rem;
-  color: #64748b;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 /* ===== PLACES CARDS ===== */
