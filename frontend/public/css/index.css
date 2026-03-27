@@ -17,7 +17,7 @@
 html, body { height: 100%; }
 
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
   overflow: hidden;
 }
 

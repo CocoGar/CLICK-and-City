@@ -92,7 +92,7 @@ function renderCards(weather, forecast, places) {
         weather
           ? `
           <div class="card-temp">${Math.round(weather.temperature)}°C</div>
-          <p class="card-text">${traducirDesc(weather.description).charAt(0).toUpperCase() + traducirDesc(weather.description).slice(1)}</p>
+          <p class="card-temp-desc">${traducirDesc(weather.description).charAt(0).toUpperCase() + traducirDesc(weather.description).slice(1)}</p>
           <div class="card-weather-details">
             <span>💧 ${weather.humidity}%</span>
             <span>💨 ${weather.wind}</span>
