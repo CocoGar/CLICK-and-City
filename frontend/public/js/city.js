@@ -51,8 +51,8 @@ function renderHero(city, weather) {
   if (!hero) return;
 
   hero.innerHTML = `
-    <div class="city-tag">${weather?.country || ""}</div>
-    <h1 class="city-name">${city.replace(/\b\w/g, (l) => l.toUpperCase())}</h1>
+    <div class="city-tag" data-cy="city-tag">${weather?.country || ""}</div>
+    <h1 class="city-name" data-cy="city-title">${city.replace(/\b\w/g, (l) => l.toUpperCase())}</h1>
     ${
       weather
         ? `
@@ -68,6 +68,7 @@ function renderHero(city, weather) {
     }
   `;
 }
+
 /* ================= CARDS ================= */
 
 function renderCards(weather, forecast, places) {

@@ -1,6 +1,6 @@
 const express = require("express");
-const cors = require("cors");
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 const citiesRoutes = require("./routes/cities");
 const weatherRoutes = require("./routes/weather");
@@ -12,7 +12,14 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://127.0.0.1:5500",
+    methods: ["GET", "POST"],
+    credentials: true,
+  }),
+);
+
 app.use(express.json());
 
 app.use("/api/cities", citiesRoutes);

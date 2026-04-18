@@ -1,8 +1,8 @@
-const API_BASE_URL = "http://localhost:3000/api";
+const API_BASE_URL = "http://127.0.0.1:3000/api";
 
 async function searchCities(query) {
   const response = await fetch(
-    `${API_BASE_URL}/cities/search?q=${encodeURIComponent(query)}`
+    `${API_BASE_URL}/cities/search?q=${encodeURIComponent(query)}`,
   );
 
   if (!response.ok) {
@@ -14,7 +14,7 @@ async function searchCities(query) {
 
 async function getWeather(city) {
   const response = await fetch(
-    `${API_BASE_URL}/weather?city=${encodeURIComponent(city)}`
+    `${API_BASE_URL}/weather?city=${encodeURIComponent(city)}`,
   );
 
   if (!response.ok) {
@@ -26,7 +26,7 @@ async function getWeather(city) {
 
 async function getPlaces(city, category) {
   const response = await fetch(
-    `${API_BASE_URL}/places/${encodeURIComponent(city)}/${encodeURIComponent(category)}`
+    `${API_BASE_URL}/places/${encodeURIComponent(city)}/${encodeURIComponent(category)}`,
   );
 
   if (!response.ok) {

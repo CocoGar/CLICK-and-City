@@ -10,6 +10,11 @@ const {
 module.exports = defineConfig({
   e2e: {
     specPattern: "cypress/e2e/**/*.feature",
+    viewportWidth: 1280,
+    viewportHeight: 1500,
+    // Quitar esto para limpiar memoria entre tests
+    //testIsolation: false,
+
     async setupNodeEvents(on, config) {
       await addCucumberPreprocessorPlugin(on, config);
       on(

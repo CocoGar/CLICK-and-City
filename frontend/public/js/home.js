@@ -1,27 +1,35 @@
 const cityInput = document.getElementById("cityInput");
 const suggestionsList = document.getElementById("suggestionsList");
 
-cityInput.addEventListener("input", async () => {
+// Variable para controlar el temporizador
+let debounceTimer;
+
+cityInput.addEventListener("input", () => {
   const query = cityInput.value.trim();
+
+  clearTimeout(debounceTimer);
 
   if (query.length < 2) {
     suggestionsList.innerHTML = "";
     return;
   }
 
-  try {
-    const cities = await searchCities(query);
-    renderSuggestions(cities);
-  } catch (error) {
-    console.error("Error al buscar ciudades:", error);
-    suggestionsList.innerHTML = "<li>Error al cargar sugerencias</li>";
-  }
+  debounceTimer = setTimeout(async () => {
+    try {
+      console.log(`Buscando sugerencias para: ${query}...`);
+      const cities = await searchCities(query);
+      renderSuggestions(cities);
+    } catch (error) {
+      console.error("Error al buscar ciudades:", error);
+      suggestionsList.innerHTML = "<li>Error al cargar sugerencias</li>";
+    }
+  }, 500);
 });
 
 function renderSuggestions(cities) {
   suggestionsList.innerHTML = "";
 
-  if (!cities.length) {
+  if (!cities || !cities.length) {
     suggestionsList.innerHTML = "<li>No se encontraron ciudades</li>";
     return;
   }
