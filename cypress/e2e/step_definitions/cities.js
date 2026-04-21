@@ -1,6 +1,17 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 const BASE_URL = "http://127.0.0.1:5500/frontend/public/index.html";
+const COMMAND_DELAY = 1000;
+
+Cypress.on("command:enqueued", (obj) => {
+  if (COMMAND_DELAY > 0) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, COMMAND_DELAY);
+    });
+  }
+});
 
 // ---- BACKGROUND ----
 

@@ -2,9 +2,19 @@ import { Given, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 const BASE_URL = "http://127.0.0.1:5500/frontend/public/index.html";
 const CITY = "Madrid";
+const COMMAND_DELAY = 1000;
+
+Cypress.on("command:enqueued", (obj) => {
+  if (COMMAND_DELAY > 0) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, COMMAND_DELAY);
+    });
+  }
+});
 
 beforeEach(() => {
-  // Limpiamos los alias para que no hereden basura de la ejecución anterior
   cy.wrap(null).as("weatherData");
   cy.wrap(null).as("photoData");
   cy.wrap(null).as("restaurantData");
@@ -63,7 +73,6 @@ Then(
   "la imagen del carrusel corresponde con la URL devuelta por Unsplash",
   () => {
     cy.get("@photoData").then((body) => {
-      // Añadimos un log para ver qué trae la API si falla
       cy.log("Datos de foto:", JSON.stringify(body));
       const imageUrl = body.urls.regular;
       cy.get(".carousel-slide.active")
