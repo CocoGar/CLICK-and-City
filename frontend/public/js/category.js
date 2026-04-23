@@ -94,7 +94,7 @@ async function loadCategory() {
     renderHeader();
 
     const data = await fetchJson(
-      `${BACKEND}/api/places/${encodeURIComponent(cityName)}/${encodeURIComponent(categoryType)}`
+      `${BACKEND}/api/places/${encodeURIComponent(cityName)}/${encodeURIComponent(categoryType)}`,
     );
 
     renderPlaces(data.places || []);
