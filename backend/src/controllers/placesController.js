@@ -2,7 +2,14 @@ const fetch = require("node-fetch");
 require("dotenv").config();
 
 const VALID_CATEGORIES = [
-  'restaurant', 'bar', 'cafe', 'museum', 'park', 'shop', 'hotel', 'nightclub'
+  "restaurant",
+  "bar",
+  "cafe",
+  "museum",
+  "park",
+  "shop",
+  "hotel",
+  "nightclub",
 ];
 
 module.exports = {
@@ -21,8 +28,8 @@ module.exports = {
     try {
       const response = await fetch(url, {
         headers: {
-          'Authorization': process.env.FOURSQUARE_SERVICE_API_KEY,
-          'X-Places-Api-Version': '2025-06-17',
+          Authorization: process.env.FOURSQUARE_SERVICE_API_KEY,
+          "X-Places-Api-Version": "2025-06-17",
         },
       });
 
@@ -32,7 +39,7 @@ module.exports = {
 
       const data = await response.json();
 
-      const places = (data.results || []).map(place => ({
+      const places = (data.results || []).map((place) => ({
         name: place.name,
         address: place.location?.formatted_address || null,
         category: place.categories?.[0]?.name || category,
@@ -46,10 +53,9 @@ module.exports = {
         total: places.length,
         places,
       });
-
     } catch (error) {
       console.error("Error fetching places:", error.message);
       res.status(500).json({ error: "Server error fetching places" });
     }
-  }
+  },
 };

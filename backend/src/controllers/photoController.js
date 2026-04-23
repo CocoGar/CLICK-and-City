@@ -19,7 +19,9 @@ module.exports = {
       });
 
       if (!response.ok) {
-        return res.status(502).json({ error: "Error fetching photo from Unsplash" });
+        return res
+          .status(502)
+          .json({ error: "Error fetching photo from Unsplash" });
       }
 
       const data = await response.json();
