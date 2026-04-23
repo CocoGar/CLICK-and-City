@@ -1,45 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CLICK&City</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/city.css" />
-  
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CLICK&City</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/city.css" />
+  </head>
 
-<body>
-  <main class="city-page">
+  <body>
+    <main class="city-page">
+      <!-- HERO -->
+      <section class="hero">
+        <div id="carousel" class="carousel"></div>
+        <div class="hero-overlay"></div>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div id="carousel" class="carousel"></div>
-      <div class="hero-overlay"></div>
+        <div id="heroContent" class="hero-content">
+          <div class="city-tag" data-cy="loading-tag">Loading...</div>
+          <h1 class="city-name" data-cy="city-title">Loading city...</h1>
+        </div>
 
-  <div id="heroContent" class="hero-content">
-    <div class="city-tag" data-cy="loading-tag">Loading...</div>
-    <h1 class="city-name" data-cy="city-title">Loading city...</h1>
-  </div>
+        <div id="carouselDots" class="carousel-dots"></div>
+        <div id="photoCredit" class="photo-credit"></div>
+      </section>
 
-      <div id="carouselDots" class="carousel-dots"></div>
-      <div id="photoCredit" class="photo-credit"></div>
-    </section>
+      <!-- ERROR -->
+      <section id="errorBox" class="error-box hidden">
+        <p id="errorText"></p>
+      </section>
 
-    <!-- ERROR -->
-    <section id="errorBox" class="error-box hidden">
-      <p id="errorText"></p>
-    </section>
+      <!-- CARDS -->
+      <section class="cards-section">
+        <div id="cardsGrid" class="cards-grid" data-cy="results-grid"></div>
+      </section>
+    </main>
 
-    <!-- CARDS -->
-  <section class="cards-section">
-    <div id="cardsGrid" class="cards-grid" data-cy="results-grid"></div>
-  </section>
-
-  </main>
-
-  <script src="./js/city.js"></script>
-</body>
+    <script src="./js/city.js"></script>
+  </body>
 </html>

@@ -1,110 +1,151 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CLICK&City - Descubre tu próxima ciudad</title>
-  <link rel="stylesheet" href="./css/index.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CLICK&City - Descubre tu próxima ciudad</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
 
-  <div class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-
-    <div class="hero-content">
-      <div class="logo-wrap">
-        <span class="logo-click">CLICK</span><span class="logo-amp">&</span><span class="logo-city">City</span>
-      </div>
-      <p class="tagline">Descubre qué hacer hoy en tu ciudad</p>
-
-      <form class="search-form" id="searchForm">
-        <div class="search-box">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-          </svg>
-          <input
-            type="text"
-            id="cityInput"
-            class="search-input"
-            placeholder="¿A dónde vas? Ej: Paris, Rome, Tokyo..."
-            autocomplete="off"
-          >
+      <div class="hero-content">
+        <div class="logo-wrap">
+          <span class="logo-click">CLICK</span><span class="logo-amp">&</span
+          ><span class="logo-city">City</span>
         </div>
-        <button type="submit" class="search-btn">
-          Buscar
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </button>
-      </form>
-      <ul id="suggestionsList"></ul>
+        <p class="tagline">Descubre qué hacer hoy en tu ciudad</p>
 
-      <div id="searchError" style="display:none; color:#fff; background:rgba(220,50,50,0.7); backdrop-filter:blur(8px); border-radius:8px; padding:0.5rem 1rem; margin-top:0.6rem; font-size:0.85rem; text-align:center;">
-        Por favor introduce un nombre de ciudad válido (solo letras, mínimo 2 caracteres).
-      </div>
+        <form class="search-form" id="searchForm">
+          <div class="search-box">
+            <svg
+              class="search-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+            <input
+              type="text"
+              id="cityInput"
+              class="search-input"
+              placeholder="¿A dónde vas? Ej: Paris, Rome, Tokyo..."
+              autocomplete="off"
+            />
+          </div>
+          <button type="submit" class="search-btn">
+            Buscar
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+        </form>
+        <ul id="suggestionsList"></ul>
 
-      <div class="hints">
-        <span>Prueba con:</span>
-        <a href="city.html?city=Madrid">Madrid</a>
-        <a href="city.html?city=Barcelona">Barcelona</a>
-        <a href="city.html?city=Paris">Paris</a>
-        <a href="city.html?city=Rome">Rome</a>
+        <div
+          id="searchError"
+          style="
+            display: none;
+            color: #fff;
+            background: rgba(220, 50, 50, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.85rem;
+            text-align: center;
+          "
+        >
+          Por favor introduce un nombre de ciudad válido (solo letras, mínimo 2
+          caracteres).
+        </div>
+
+        <div class="hints">
+          <span>Prueba con:</span>
+          <a href="city.html?city=Madrid">Madrid</a>
+          <a href="city.html?city=Barcelona">Barcelona</a>
+          <a href="city.html?city=Paris">Paris</a>
+          <a href="city.html?city=Rome">Rome</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    function validateCity(value) {
-      const regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s\-]{2,50}$/;
-      return regex.test(value.trim());
-    }
-
-    document.getElementById('searchForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const city = document.getElementById('cityInput').value.trim();
-      const errorDiv = document.getElementById('searchError');
-      const btn = document.querySelector('.search-btn');
-
-      if (!validateCity(city)) {
-        errorDiv.textContent = 'Por favor introduce un nombre de ciudad válido (solo letras, mínimo 2 caracteres).';
-        errorDiv.style.display = 'block';
-        return;
+    <script>
+      function validateCity(value) {
+        const regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s\-]{2,50}$/;
+        return regex.test(value.trim());
       }
 
-      // Verificar que la ciudad existe antes de navegar
-        btn.style.opacity = '0.7';
-        btn.disabled = true;
+      document
+        .getElementById("searchForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const city = document.getElementById("cityInput").value.trim();
+          const errorDiv = document.getElementById("searchError");
+          const btn = document.querySelector(".search-btn");
 
-      try {
-        const res = await fetch(`http://localhost:3000/api/weather?city=${encodeURIComponent(city)}`);
-        const data = await res.json();
+          if (!validateCity(city)) {
+            errorDiv.textContent =
+              "Por favor introduce un nombre de ciudad válido (solo letras, mínimo 2 caracteres).";
+            errorDiv.style.display = "block";
+            return;
+          }
 
-        if (data.error || !res.ok) {
-          errorDiv.textContent = 'Ciudad no encontrada. Por favor verifica el nombre e inténtalo de nuevo.';
-          errorDiv.style.display = 'block';
-        } else {
-          errorDiv.style.display = 'none';
-          window.location.href = 'city.html?city=' + encodeURIComponent(city);
-        }
-      } catch(e) {
-        errorDiv.textContent = 'No se pudo conectar con el servidor. Asegúrate de que el backend está activo.';
-        errorDiv.style.display = 'block';
-      } finally {
-        btn.style.opacity = '1';
-        btn.disabled = false;
-      }
-    });
+          // Verificar que la ciudad existe antes de navegar
+          btn.style.opacity = "0.7";
+          btn.disabled = true;
 
-    document.getElementById('cityInput').addEventListener('input', function() {
-      document.getElementById('searchError').style.display = 'none';
-    });
+          try {
+            const res = await fetch(
+              `http://localhost:3000/api/weather?city=${encodeURIComponent(city)}`,
+            );
+            const data = await res.json();
 
-  </script>
-  <script src="./js/api.js"></script>
-  <script src="./js/home.js"></script>
-</body>
+            if (data.error || !res.ok) {
+              errorDiv.textContent =
+                "Ciudad no encontrada. Por favor verifica el nombre e inténtalo de nuevo.";
+              errorDiv.style.display = "block";
+            } else {
+              errorDiv.style.display = "none";
+              window.location.href =
+                "city.html?city=" + encodeURIComponent(city);
+            }
+          } catch (e) {
+            errorDiv.textContent =
+              "No se pudo conectar con el servidor. Asegúrate de que el backend está activo.";
+            errorDiv.style.display = "block";
+          } finally {
+            btn.style.opacity = "1";
+            btn.disabled = false;
+          }
+        });
+
+      document
+        .getElementById("cityInput")
+        .addEventListener("input", function () {
+          document.getElementById("searchError").style.display = "none";
+        });
+    </script>
+    <script src="./js/api.js"></script>
+    <script src="./js/home.js"></script>
+  </body>
 </html>
