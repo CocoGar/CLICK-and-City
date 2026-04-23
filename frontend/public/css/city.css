@@ -3,7 +3,11 @@
 }
 
 :root {
-  --bg-page: linear-gradient(180deg,rgba(255, 255, 255, 1) 0%, rgba(218, 226, 237, 1) 100%);
+  --bg-page: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(218, 226, 237, 1) 100%
+  );
 
   --bg-card: rgba(255, 255, 255, 0.92);
   --bg-glass: rgba(255, 255, 255, 0.16);
@@ -26,7 +30,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background: var(--bg-page);
   color: var(--text-main);
 }
@@ -89,23 +93,22 @@ img {
   position: absolute;
   inset: 0;
   z-index: 2;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(17, 24, 39, 0.18) 0%,
-      rgba(17, 24, 39, 0.48) 50%,
-      rgba(17, 24, 39, 0.72) 100%
-    );
+  background: linear-gradient(
+    180deg,
+    rgba(17, 24, 39, 0.18) 0%,
+    rgba(17, 24, 39, 0.48) 50%,
+    rgba(17, 24, 39, 0.72) 100%
+  );
 }
 
 .hero-content {
   position: absolute;
-  bottom: 125px;       
-  left: 0;           
-  right: 0;           
+  bottom: 125px;
+  left: 0;
+  right: 0;
   z-index: 3;
   max-width: var(--max-width);
-  margin: 0 auto;     
+  margin: 0 auto;
   padding: 120px 24px 0;
   text-align: left;
   color: var(--text-light);
@@ -338,7 +341,7 @@ img {
 }
 
 .card-weather {
-  background: linear-gradient(135deg, #1e3a5f 0%, #5180B0 100%);
+  background: linear-gradient(135deg, #1e3a5f 0%, #5180b0 100%);
 }
 
 .card-weather .card-title,
@@ -398,8 +401,6 @@ img {
   padding: 15px 4px 45px 45px;
 }
 
-
-
 /* ===== FORECAST ===== */
 
 .forecast-title {
@@ -418,7 +419,12 @@ img {
   gap: 8px;
   padding: 10px 0;
   border-bottom: 1px solid transparent;
-  border-image: linear-gradient(to right, rgba(255,255,255,0.12) 90%, transparent 90%) 1;
+  border-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.12) 90%,
+      transparent 90%
+    )
+    1;
 }
 
 .forecast-row:last-child {
@@ -500,13 +506,7 @@ img {
 .skeleton-line {
   height: 12px;
   border-radius: 999px;
-  background:
-    linear-gradient(
-      90deg,
-      #f2f4f7 25%,
-      #e8ecf1 37%,
-      #f2f4f7 63%
-    );
+  background: linear-gradient(90deg, #f2f4f7 25%, #e8ecf1 37%, #f2f4f7 63%);
   background-size: 400% 100%;
   animation: shimmer 1.4s infinite ease;
   margin-bottom: 12px;
