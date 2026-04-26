@@ -17,8 +17,6 @@ Pablo Goya Garrido
 **Frontend**
 
 - HTML, CSS, JavaScript
-- [Leaflet.js](https://leafletjs.com/) — librería de mapas interactivos
-- [OpenStreetMap](https://www.openstreetmap.org/) — proveedor de mapas gratuito y sin límites
 
 **Backend**
 
